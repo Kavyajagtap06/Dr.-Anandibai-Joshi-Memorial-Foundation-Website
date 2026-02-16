@@ -1,83 +1,137 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import Card from '../components/Card'
-import Button from '../components/Button'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useRef, useState } from 'react'
 
-const events = [
+const opportunities = [
   {
-    title: 'Health & Wellness Camp – Pune',
-    date: 'March 15, 2025',
-    description: 'Free health check-ups, nutrition counseling, and awareness sessions for women in the community.',
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80',
+    title: 'Transparent & Mission-Driven Foundation',
+    summary: 'A dedicated 501(c)(3) public charitable organization operating with full transparency.',
+    expanded:
+      'Our foundation operates with complete transparency, ensuring that all funds are effectively utilized to advance women\'s health and education initiatives. We are a mission-driven IRS 501(c)(3) public charitable organization with a global perspective and local impact.',
   },
   {
-    title: 'Scholarship Application Workshop',
-    date: 'March 22, 2025',
-    description: 'Guidance for students and parents on applying for our educational scholarships and financial aid.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80',
+    title: 'Community & Program Partnerships',
+    summary: 'Collaborative partnerships tailored to real community needs.',
+    expanded:
+      'We provide essential resources and introductory access to our workshops and programs. By identifying and understanding the specific needs of community, healthcare, and educational partners, we tailor programs and partnerships to maximize effectiveness and reach.',
   },
   {
-    title: 'Women in Leadership Talk',
-    date: 'April 5, 2025',
-    description: 'An evening with inspiring women leaders sharing their journeys and advice for the next generation.',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80',
+    title: 'Strategic Impact Support',
+    summary: 'Customized guidance to maximize meaningful outcomes.',
+    expanded:
+      'We offer additional resources and personalized guidance to strengthen your impact. When necessary, we connect you with trusted global resources to further customize programs and ensure the greatest possible benefit.',
   },
 ]
 
 export default function Events() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const [openIndex, setOpenIndex] = useState(null)
+
+  const togglePanel = (index) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
 
   return (
-    <section id="events" className="py-20 md:py-28 bg-foundation-cream" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="events" className="py-20 md:py-28 bg-[#f9f6f2]" ref={ref}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="font-serif text-3xl sm:text-4xl font-bold text-gray-800 text-center"
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="font-serif text-3xl sm:text-4xl md:text-[2.5rem] font-bold text-gray-800 text-center"
         >
-          Upcoming Events & News
+          Explore Opportunities
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-4 text-center text-gray-600 max-w-2xl mx-auto"
+          transition={{ duration: 0.5, delay: 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mt-5 text-center text-gray-500 max-w-2xl mx-auto tracking-wide"
         >
-          Join us at our next events and stay updated.
+          Engage with our mission through meaningful collaboration and partnership.
         </motion.p>
 
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {events.map((event, i) => (
-            <motion.div
-              key={event.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-            >
-              <Card className="overflow-hidden">
-                <div className="aspect-[16/10] overflow-hidden bg-gray-200">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <p className="text-sm font-medium text-lavender-600">{event.date}</p>
-                  <h3 className="mt-2 font-serif text-lg font-semibold text-gray-800">{event.title}</h3>
-                  <p className="mt-3 text-gray-600 text-sm">{event.description}</p>
-                  <div className="mt-5">
-                    <Button variant="ghost" className="!px-0 !py-0 text-lavender-500 font-medium">
-                      Learn More →
-                    </Button>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mt-14 space-y-0"
+        >
+          {opportunities.map((opportunity, index) => {
+            const isOpen = openIndex === index
+            return (
+              <div key={opportunity.title}>
+                {/* Divider */}
+                {index > 0 && (
+                  <div className="h-px bg-gray-200/60" aria-hidden="true" />
+                )}
+                
+                {/* Panel */}
+                <button
+                  onClick={() => togglePanel(index)}
+                  className="w-full text-left py-6 px-0 group transition-colors duration-200 hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-[#6b2d30]/20 focus:ring-offset-2 focus:ring-offset-[#f9f6f2] rounded-lg"
+                  aria-expanded={isOpen}
+                  aria-controls={`panel-content-${index}`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-serif text-xl font-semibold text-gray-800 group-hover:text-[#6b2d30] transition-colors duration-200">
+                        {opportunity.title}
+                      </h3>
+                      <p className="mt-2 text-gray-600 text-[15px] leading-relaxed">
+                        {opportunity.summary}
+                      </p>
+                    </div>
+                    
+                    {/* Arrow icon */}
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="flex-shrink-0 mt-1"
+                    >
+                      <svg
+                        className="w-5 h-5 text-gray-400 group-hover:text-[#6b2d30] transition-colors duration-200"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </motion.div>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+
+                  {/* Expanded content */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`panel-content-${index}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{
+                          duration: 0.35,
+                          ease: [0.25, 0.46, 0.45, 0.94],
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-4 mt-4 border-t border-gray-200/60">
+                          <p className="text-gray-700 leading-relaxed text-[15px]">
+                            {opportunity.expanded}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </div>
+            )
+          })}
+        </motion.div>
       </div>
     </section>
   )

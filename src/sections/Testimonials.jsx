@@ -30,7 +30,7 @@ export default function Testimonials() {
           transition={{ duration: 0.5 }}
           className="font-serif text-3xl sm:text-4xl font-bold text-gray-800 text-center"
         >
-          Success Stories
+          Testimonials
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}

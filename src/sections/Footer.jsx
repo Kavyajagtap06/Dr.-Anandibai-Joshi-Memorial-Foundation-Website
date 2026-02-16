@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 const quickLinks = [
   { label: 'About Us', href: '#about' },
   { label: 'Our Initiatives', href: '#initiatives' },
-  { label: 'Programs', href: '#programs' },
+  { label: 'Our Services', href: '#services' },
   { label: 'Events', href: '#events' },
   { label: 'Donate', href: '#donate' },
   { label: 'Contact', href: '#footer' },

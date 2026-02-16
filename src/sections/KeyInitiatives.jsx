@@ -1,41 +1,37 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import Card from '../components/Card'
-import Button from '../components/Button'
 
 const initiatives = [
   {
-    title: "Women's Health Awareness",
-    description: "Free health camps, screenings, and awareness drives to ensure every woman can make informed choices about her wellbeing.",
+    title: 'Community-Centric Initiatives',
+    description:
+      'Our programs are designed to directly address the specific needs of communities, fostering local empowerment and sustainable development while embracing globally informed approaches.',
     icon: (
-      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
       </svg>
     ),
-    color: 'text-rose-500',
-    bgColor: 'bg-rose-50',
   },
   {
-    title: 'Educational Scholarships',
-    description: "Merit and need-based scholarships for girls and women to pursue higher education and break the cycle of disadvantage.",
+    title: 'Empowerment Through Education',
+    description:
+      "We believe in the transformative power of education, providing women with opportunities to learn, grow, and thrive in their personal and professional lives.",
     icon: (
-      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
       </svg>
     ),
-    color: 'text-lavender-500',
-    bgColor: 'bg-lavender-50',
   },
   {
-    title: 'Skill Development',
-    description: "Vocational training and mentorship programs to help women gain employable skills and achieve financial independence.",
+    title: 'Holistic Health Approach',
+    description:
+      'Our foundation employs a comprehensive approach to women\'s health, integrating physical, mental, and emotional wellness into our programs to ensure well-rounded and sustainable support.',
     icon: (
-      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
       </svg>
     ),
-    color: 'text-lavender-500',
-    bgColor: 'bg-lavender-50',
   },
 ]
 
@@ -44,21 +40,37 @@ export default function KeyInitiatives() {
   const isInView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="initiatives" className="py-20 md:py-28 bg-foundation-cream" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="initiatives"
+      className="relative py-20 md:py-28 overflow-hidden"
+      ref={ref}
+      style={{
+        background: 'linear-gradient(180deg, rgba(107, 45, 48, 0.05) 0%, rgba(249, 246, 242, 0.4) 40%, #f9f6f2 100%)',
+      }}
+    >
+      {/* Top decorative divider */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px opacity-40"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(107, 45, 48, 0.25) 50%, transparent 100%)',
+        }}
+        aria-hidden
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="font-serif text-3xl sm:text-4xl font-bold text-gray-800 text-center"
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="font-serif text-3xl sm:text-4xl md:text-[2.5rem] font-bold text-gray-800 text-center"
         >
           Our Key Initiatives
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-4 text-center text-gray-600 max-w-2xl mx-auto"
+          transition={{ duration: 0.5, delay: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mt-5 text-center text-gray-500 max-w-2xl mx-auto tracking-wide text-base sm:text-lg"
         >
           Focused programs that create lasting change in women's lives.
         </motion.p>
@@ -67,20 +79,44 @@ export default function KeyInitiatives() {
           {initiatives.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.12 + i * 0.15,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
             >
-              <Card className="p-8 h-full flex flex-col">
-                <div className={`inline-flex p-3 rounded-xl ${item.bgColor} ${item.color} w-fit`}>
+              <Card
+                className="group p-8 h-full flex flex-col bg-[#fdfbf9] shadow-lg shadow-gray-200/50 border border-gray-100/80 transition-shadow duration-300"
+                whileHover={{
+                  y: -6,
+                  scale: 1.02,
+                  boxShadow: '0 24px 48px -12px rgba(107, 45, 48, 0.12)',
+                }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              >
+                <div
+                  className="inline-flex p-3.5 rounded-full w-fit text-[#6b2d30] bg-[#6b2d30]/10 transition-colors duration-300 group-hover:bg-[#6b2d30]/20"
+                >
                   {item.icon}
                 </div>
-                <h3 className="mt-6 font-serif text-xl font-semibold text-gray-800">{item.title}</h3>
-                <p className="mt-3 text-gray-600 flex-1">{item.description}</p>
-                <div className="mt-6">
-                  <Button variant="ghost" className="!px-0 !py-0 text-lavender-500 font-medium">
-                    Learn More →
-                  </Button>
+                <h3 className="mt-6 font-serif text-xl sm:text-2xl font-semibold text-gray-800 leading-snug max-w-[320px]">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-gray-600 leading-relaxed flex-1 max-w-[320px]">
+                  {item.description}
+                </p>
+                <div className="mt-6 pt-1">
+                  <a
+                    href="#about"
+                    className="group/link inline-flex items-center gap-1 font-medium text-[#6b2d30] no-underline relative after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-[#6b2d30] after:transition-all after:duration-300 after:ease-out hover:after:w-full hover:text-[#5a2528] transition-colors duration-300"
+                  >
+                    <span>Learn More</span>
+                    <span className="inline-block transition-transform duration-300 ease-out group-hover/link:translate-x-1">
+                      →
+                    </span>
+                  </a>
                 </div>
               </Card>
             </motion.div>
