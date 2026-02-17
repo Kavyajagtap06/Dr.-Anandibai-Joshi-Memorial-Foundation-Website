@@ -79,29 +79,19 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const isScrolled = scrolled
-  const isSubpage = pathname !== '/' // detect if not home
-  const textClass = isScrolled || isSubpage ? 'text-gray-800' : 'text-white'
-
+  // ✅ Always use dark text and white background
+  const textClass = 'text-gray-800'
   const linkClass = (active) =>
-    isScrolled || isSubpage
-      ? active
-        ? 'text-lavender-600 font-semibold'
-        : 'text-gray-700 hover:text-lavender-600'
-      : active
-        ? 'text-white font-semibold'
-        : 'text-white/90 hover:text-white'
+    active
+      ? 'text-lavender-600 font-semibold'
+      : 'text-gray-700 hover:text-lavender-600'
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isSubpage
-          ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5 transition-all duration-300"
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -210,7 +200,9 @@ export default function Navbar() {
                 <Link
                   to={donateItem.href}
                   className={`ml-4 px-5 py-2.5 text-sm font-semibold rounded-lg bg-gradient-to-r from-lavender-500 to-rose-500 text-white shadow-lg shadow-lavender-400/30 hover:shadow-xl hover:shadow-lavender-500/40 hover:from-lavender-600 hover:to-rose-600 transition-all duration-300 ${
-                    donateActive ? 'ring-2 ring-lavender-400 ring-offset-2 ring-offset-white' : ''
+                    donateActive
+                      ? 'ring-2 ring-lavender-400 ring-offset-2 ring-offset-white'
+                      : ''
                   }`}
                 >
                   {donateItem.label}

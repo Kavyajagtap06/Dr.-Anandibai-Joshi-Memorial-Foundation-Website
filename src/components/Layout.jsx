@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="pt-20"> {/* Add padding-top to push content below navbar */}
         <Outlet />
       </main>
       <Footer />
