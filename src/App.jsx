@@ -9,6 +9,7 @@ import DonatePage from './pages/DonatePage'
 import Page from './pages/Page'
 import Overview from "./pages/About/Overview"
 import Mission_Vision from "./pages/Home_tab/Mission_Vision"
+import Contact from "./pages/Contact/Contact"
 
 export default function App() {
   const [loading, setLoading] = useState(true)
@@ -62,7 +63,7 @@ export default function App() {
               <Route path="donate" element={<DonatePage />} />
               <Route path="resources" element={<Page title="Resources" />} />
               <Route path="blog" element={<Page title="Blog" />} />
-              <Route path="contact" element={<Page title="Contact Us" />} />
+              <Route path="contact" element={<Contact />} />
 
             </Route>
           </Routes>

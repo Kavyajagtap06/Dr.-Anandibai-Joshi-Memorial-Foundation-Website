@@ -55,16 +55,28 @@ export default function Overview() {
 
       {/* Inspiration Section */}
       <section className="py-16 px-6 md:px-16 text-center">
-        <div className="max-w-xl mx-auto">
-          <div className="h-1 w-16 bg-[#C6A43F] mx-auto mb-6"></div>
-          <p className="text-lg text-gray-800 mb-6">
-            Dr. Anandibai Joshi broke barriers over a century ago, proving that courage and vision can change the world.
-            Her journey from a small town in India to becoming the first Indian woman physician in the West is a testament
-            to determination and resilience. Today, her legacy fuels a foundation committed to improving women’s lives globally.
-          </p>
-          <div className="h-1 w-16 bg-[#C6A43F] mx-auto mt-6"></div>
-        </div>
-      </section>
+  <div className="max-w-3xl mx-auto">
+    
+    <div className="h-1 w-16 bg-[#C6A43F] mx-auto mb-8"></div>
+
+    <p className="text-lg text-gray-800 mb-6 leading-relaxed">
+      Dr. Anandibai Joshi broke barriers over a century ago, proving that courage and vision can change the world. 
+      Her journey from a small town in India to becoming the first Indian woman physician in the West stands as a powerful testament to determination and resilience.
+    </p>
+
+    <p className="text-lg text-gray-800 mb-6 leading-relaxed">
+      Today, her legacy continues to inspire and drive meaningful change. It fuels a foundation committed to improving women’s lives globally through health, education, and empowerment.
+    </p>
+
+    <p className="text-lg text-gray-800 leading-relaxed">
+      At the Dr. Anandibai Joshi Memorial Foundation, we strive to honor her vision by nurturing a supportive and inclusive community where women can grow, lead, and thrive with confidence and dignity.
+    </p>
+
+    <div className="h-1 w-16 bg-[#C6A43F] mx-auto mt-8"></div>
+
+  </div>
+</section>
+
 
       {/* Four Pillars Section */}
       <section className="py-16 px-6 md:px-16 bg-white">

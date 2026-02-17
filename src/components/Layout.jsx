@@ -8,7 +8,7 @@ export default function Layout() {
     <>
       <Header />
       <Navbar />
-      <main className="pt-30"> {/* Increased padding to account for header + navbar */}
+      <main className="pt-39"> {/* Increased padding to account for header + navbar */}
         <Outlet />
       </main>
       <Footer />
