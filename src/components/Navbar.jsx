@@ -80,12 +80,14 @@ export default function Navbar() {
   }, [])
 
   const isScrolled = scrolled
-  const textClass = isScrolled ? 'text-gray-800' : 'text-white'
+  const isSubpage = pathname !== '/' // detect if not home
+  const textClass = isScrolled || isSubpage ? 'text-gray-800' : 'text-white'
+
   const linkClass = (active) =>
-    isScrolled
+    isScrolled || isSubpage
       ? active
         ? 'text-lavender-600 font-semibold'
-        : 'text-gray-600 hover:text-lavender-500'
+        : 'text-gray-700 hover:text-lavender-600'
       : active
         ? 'text-white font-semibold'
         : 'text-white/90 hover:text-white'
@@ -96,8 +98,8 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-black/5'
+        isScrolled || isSubpage
+          ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5'
           : 'bg-transparent'
       }`}
     >
@@ -114,86 +116,92 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center flex-1 justify-end">
             <div className="flex items-center gap-1 mr-auto">
-            {navItems
-              .filter((item) => item.label !== 'Donate')
-              .map((item) => {
-              if (item.children) {
-                return (
-                  <div
-                    key={item.label}
-                    className="relative"
-                    onMouseEnter={() => setActiveDropdown(item.label)}
-                    onMouseLeave={() => setActiveDropdown(null)}
-                  >
+              {navItems
+                .filter((item) => item.label !== 'Donate')
+                .map((item) => {
+                  if (item.children) {
+                    return (
+                      <div
+                        key={item.label}
+                        className="relative"
+                        onMouseEnter={() => setActiveDropdown(item.label)}
+                        onMouseLeave={() => setActiveDropdown(null)}
+                      >
+                        <Link
+                          to={item.href}
+                          className={`relative inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${linkClass(
+                            isParentActive(pathname, item)
+                          )}`}
+                        >
+                          {item.label}
+                          <svg
+                            className={`w-4 h-4 transition-transform duration-300 ${
+                              activeDropdown === item.label ? 'rotate-180' : ''
+                            }`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </Link>
+
+                        <AnimatePresence>
+                          {activeDropdown === item.label && (
+                            <motion.div
+                              variants={dropdownVariants}
+                              initial="hidden"
+                              animate="visible"
+                              exit="exit"
+                              transition={{ duration: 0.2, ease: 'easeOut' }}
+                              className="absolute left-0 top-full pt-2 min-w-[220px]"
+                            >
+                              <div className="rounded-xl bg-white/95 backdrop-blur-xl shadow-xl shadow-black/10 border border-gray-100/80 overflow-hidden py-2">
+                                {item.children.map((child, idx) => (
+                                  <div key={child.href}>
+                                    {idx > 0 && (
+                                      <div className="mx-3 my-1 border-t border-gray-100" />
+                                    )}
+                                    <Link
+                                      to={child.href}
+                                      className={`block px-4 py-2.5 text-sm font-medium transition-colors duration-200 ${
+                                        isPathActive(pathname, child.href)
+                                          ? 'text-lavender-600 bg-lavender-50/80 font-semibold'
+                                          : 'text-gray-700 hover:text-lavender-600 hover:bg-lavender-50/80'
+                                      }`}
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )
+                  }
+
+                  return (
                     <Link
+                      key={item.label}
                       to={item.href}
-                      className={`relative inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${linkClass(isParentActive(pathname, item))}`}
+                      className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${linkClass(
+                        isPathActive(pathname, item.href)
+                      )}`}
                     >
                       {item.label}
-                      <svg
-                        className={`w-4 h-4 transition-transform duration-300 ${
-                          activeDropdown === item.label ? 'rotate-180' : ''
-                        }`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
                     </Link>
-
-                    <AnimatePresence>
-                      {activeDropdown === item.label && (
-                        <motion.div
-                          variants={dropdownVariants}
-                          initial="hidden"
-                          animate="visible"
-                          exit="exit"
-                          transition={{ duration: 0.2, ease: 'easeOut' }}
-                          className="absolute left-0 top-full pt-2 min-w-[220px]"
-                        >
-                          <div className="rounded-xl bg-white/95 backdrop-blur-xl shadow-xl shadow-black/10 border border-gray-100/80 overflow-hidden py-2">
-                            {item.children.map((child, idx) => (
-                              <div key={child.href}>
-                                {idx > 0 && (
-                                  <div className="mx-3 my-1 border-t border-gray-100" />
-                                )}
-                                <Link
-                                  to={child.href}
-                                  className={`block px-4 py-2.5 text-sm font-medium transition-colors duration-200 ${
-                                    isPathActive(pathname, child.href)
-                                      ? 'text-lavender-600 bg-lavender-50/80 font-semibold'
-                                      : 'text-gray-700 hover:text-lavender-600 hover:bg-lavender-50/80'
-                                  }`}
-                                >
-                                  {child.label}
-                                </Link>
-                              </div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                )
-              }
-
-              return (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${linkClass(isPathActive(pathname, item.href))}`}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
+                  )
+                })}
             </div>
+
+            {/* Donate button */}
             {(() => {
               const donateItem = navItems.find((i) => i.label === 'Donate')
               if (!donateItem) return null
@@ -220,7 +228,12 @@ export default function Navbar() {
             className={`lg:hidden p-2.5 rounded-xl transition-colors duration-300 ${textClass}`}
             aria-label="Toggle menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               {mobileOpen ? (
                 <path
                   strokeLinecap="round"
@@ -343,7 +356,7 @@ export default function Navbar() {
                     key={item.label}
                     to={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`block py-3 px-4 font-medium rounded-xl transition-colors duration-200 ${
+                    className={`block py-3 px-4 font-medium rounded-lg transition-colors duration-200 ${
                       isPathActive(pathname, item.href)
                         ? 'text-lavender-600 bg-lavender-50/80'
                         : 'text-gray-700 hover:text-lavender-600 hover:bg-gray-50'
