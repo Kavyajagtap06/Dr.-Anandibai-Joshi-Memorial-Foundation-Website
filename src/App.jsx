@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import DonatePage from './pages/DonatePage'
 import Page from './pages/Page'
 import Overview from "./pages/About/Overview"
+import Mission_Vision from "./pages/Home_tab/Mission_Vision"
 
 export default function App() {
   const [loading, setLoading] = useState(true)
@@ -30,7 +31,7 @@ export default function App() {
               
               {/* Home */}
               <Route index element={<Home />} />
-              <Route path="mission-vision" element={<Page title="Mission & Vision" />} />
+              <Route path="mission-vision" element={<Mission_Vision />} />
               <Route path="purpose" element={<Page title="Purpose" />} />
 
               {/* About */}
